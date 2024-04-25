@@ -1,4 +1,4 @@
-@Library('shared-library') _
+@Library('TFG-compartido') _
 
 import org.nazaret.Destroy
 

@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Copiar el archivo actualizado index.nginx-debian.html al directorio raíz de Nginx
-                    sh 'sudo cp /var/jenkins_home/workspace/cambios\ nginx/index.nginx-debian.html /var/www/html/'
+                    sh 'sudo cp /var/jenkins_home/workspace/nginx/index.nginx-debian.html /var/www/html/'
 
                     // Reiniciar Nginx para aplicar los cambios
                     sh 'sudo systemctl restart nginx'

@@ -2,20 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                // Checkout the code from your GitHub repository
-                git 'https://ghp_ce8OxDHbfdn4bH4YpvxxKx7IM5GwON0iANbl@github.com/JG-Alba/TFG.git'
-            }
-        }
-
         stage('Update Nginx Configuration') {
             steps {
                 script {
-                    // Copy the updated index.nginx-debian.html file to the Nginx document root
-                    sh 'sudo cp /var/jenkins_home/workspace/TFG/index.nginx-debian.html /var/www/html/'
+                    // Copiar el archivo actualizado index.nginx-debian.html al directorio raíz de Nginx
+                    sh 'sudo cp /var/jenkins_home/workspace/TuProyecto/index.nginx-debian.html /var/www/html/'
 
-                    // Restart Nginx to apply the changes
+                    // Reiniciar Nginx para aplicar los cambios
                     sh 'sudo systemctl restart nginx'
                 }
             }
@@ -24,10 +17,10 @@ pipeline {
 
     post {
         success {
-            echo 'Nginx configuration updated successfully!'
+            echo 'Configuración de Nginx actualizada exitosamente!'
         }
         failure {
-            echo 'Failed to update Nginx configuration.'
+            echo 'Error al actualizar la configuración de Nginx.'
         }
     }
 }

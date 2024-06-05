@@ -2,14 +2,23 @@ pipeline {
     agent any
 
     stages {
-        stage('Update apache Configuration') {
+        stage('Update Apache Configuration') {
             steps {
                 script {
                     // Copiar el archivo actualizado index.html al directorio raíz de apache
                     sh 'docker cp /var/jenkins_home/workspace/apache/index.html cpagina:/var/www/html/'
 
+                    // Verificar si el archivo se ha copiado correctamente
+                    sh 'docker exec cpagina ls -la /var/www/html/'
+
+                    // Mostrar el contenido del archivo copiado para verificar que es el correcto
+                    sh 'docker exec cpagina cat /var/www/html/index.html'
+
                     // Reiniciar apache para aplicar los cambios
-                    sh 'docker exec -it -u root cpagina service apache2 restart'
+                    sh 'docker exec -u root cpagina service apache2 restart'
+
+                    // Verificar el estado del servicio Apache
+                    sh 'docker exec -u root cpagina service apache2 status'
                 }
             }
         }
@@ -17,10 +26,11 @@ pipeline {
 
     post {
         success {
-            echo 'Configuración de apache actualizada exitosamente!'
+            echo 'Configuración de Apache actualizada exitosamente!'
         }
         failure {
-            echo 'Error al actualizar la configuración de apache.'
+            echo 'Error al actualizar la configuración de Apache.'
         }
     }
 }
+

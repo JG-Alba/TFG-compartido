@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Copiar el archivo actualizado index.html al directorio raíz de apache
-                    sh 'docker cp /var/jenkins_home/workspace/apache/index.html cpagina:/var/www/html/
+                    sh 'docker cp /var/jenkins_home/workspace/apache/index.html cpagina:/var/www/html/'
 '
 
                     // Reiniciar apache para aplicar los cambios

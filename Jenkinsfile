@@ -2,14 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Update Nginx Configuration') {
+        stage('Update apache Configuration') {
             steps {
                 script {
-                    // Copiar el archivo actualizado index.nginx-debian.html al directorio raíz de Nginx
-                    sh 'sudo cp /var/jenkins_home/workspace/nginx/index.nginx-debian.html /var/www/html/'
+                    // Copiar el archivo actualizado index.html al directorio raíz de apache
+                    sh 'docker cp /var/jenkins_home/workspace/apache/index.html cpagina:/var/www/html/
+'
 
-                    // Reiniciar Nginx para aplicar los cambios
-                    sh 'sudo systemctl restart nginx'
+                    // Reiniciar apache para aplicar los cambios
+                    sh 'sudo docker restart cpagina'
                 }
             }
         }
@@ -17,10 +18,10 @@ pipeline {
 
     post {
         success {
-            echo 'Configuración de Nginx actualizada exitosamente!'
+            echo 'Configuración de apache actualizada exitosamente!'
         }
         failure {
-            echo 'Error al actualizar la configuración de Nginx.'
+            echo 'Error al actualizar la configuración de apache.'
         }
     }
 }

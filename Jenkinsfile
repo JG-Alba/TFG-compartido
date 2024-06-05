@@ -23,14 +23,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        success {
-            echo 'Configuración de Apache actualizada exitosamente!'
-        }
-        failure {
-            echo 'Error al actualizar la configuración de Apache.'
-        }
-    }
 }
-

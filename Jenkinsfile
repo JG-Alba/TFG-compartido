@@ -10,7 +10,7 @@ pipeline {
 '
 
                     // Reiniciar apache para aplicar los cambios
-                    sh 'sudo docker restart cpagina'
+                    sh 'docker exec -it -u root cpagina service apache2 restart'
                 }
             }
         }
